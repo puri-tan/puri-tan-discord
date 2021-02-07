@@ -7,5 +7,18 @@
         "Bible",
         "Bot",
         "Devotional"
-    ]
+    ],
+    "author": {
+        "name": "Ismael Carlos Velten"
+    },
+    "version": "1.0.0",
+    "homepage": "https://github.com/puri-tan/puri-tan-discord",
+    "dependencies": {
+        "discord.js": "^12.5.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/puri-tan/puri-tan-discord.git"
+    },
+    "license": "SEE LICENSE IN LICENSE.txt"
 }
