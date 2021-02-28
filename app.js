@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { Client } from 'discord.js'
-import readBibleMessage from './bible-message-reader.js'
+import readBibleMessageIfReferenceExists from './bible-message-reader.js'
 import { BibleApiClient } from './bible-api-client.js'
 
 dotenv.config()
@@ -21,7 +21,7 @@ client.on('ready', () => {
 
 client.on('message', async message => {
   try {
-    return await readBibleMessage(bibleApiClient, message, { thumbnailUrl: process.env.BIBLE_THUMBNAIL_URL })
+    return await readBibleMessageIfReferenceExists(bibleApiClient, message, { thumbnailUrl: process.env.BIBLE_THUMBNAIL_URL })
   } catch(error) {
     console.log(error)
   }
