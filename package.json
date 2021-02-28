@@ -17,7 +17,9 @@
     "dependencies": {
         "axios": "^0.21.1",
         "discord.js": "^12.5.1",
-        "dotenv": "^8.2.0"
+        "dotenv": "^8.2.0",
+        "http": "0.0.1-security",
+        "https": "^1.0.0"
     },
     "repository": {
         "type": "git",
