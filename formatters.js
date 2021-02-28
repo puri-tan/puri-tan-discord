@@ -1,4 +1,4 @@
-const ignoreAccentuations = (expr, accentuationMap) => {
+module.exports.ignoreAccentuations = (expr, accentuationMap) => {
   for (const searchValue in accentuationMap) {
     const regex = new RegExp(searchValue, "ig")
     const replaceValue = accentuationMap[searchValue]
@@ -8,5 +8,3 @@ const ignoreAccentuations = (expr, accentuationMap) => {
 
   return expr
 }
-
-export default ignoreAccentuations

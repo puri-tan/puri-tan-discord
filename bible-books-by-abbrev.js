@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   gn: 'Gênesis',
   ex: 'Êxodo',
   lv: 'Levítico',

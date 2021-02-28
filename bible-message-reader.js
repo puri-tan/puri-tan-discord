@@ -39,7 +39,7 @@ const groupVerses = response => {
   return text
 }
 
-const readBibleMessageIfReferenceExists = async (bibleApiClient, message, options) => {
+module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, message, options) => {
   if (!message.author.bot && message.channel) {
     const groups = bibleApiClient.matchVersesFromMessage(message.content)
 
@@ -75,5 +75,3 @@ const readBibleMessageIfReferenceExists = async (bibleApiClient, message, option
     }
   }
 }
-
-export default readBibleMessageIfReferenceExists

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   'gn': 50,
   'ex': 40,
   'lv': 27,

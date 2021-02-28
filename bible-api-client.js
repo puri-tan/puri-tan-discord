@@ -1,13 +1,13 @@
-import axios from 'axios'
-import booksByAbbrev from './bible-books-by-abbrev.js'
-import booksByName from './bible-books-by-name.js'
-import bookChapters from './bible-book-chapters.js'
-import formatRegex from './regex-formatter.js'
-import formatString from './string-formatter.js'
-import http from 'http'
-import https from 'https'
+const axios = require('axios')
+const booksByAbbrev = require('./bible-books-by-abbrev')
+const booksByName = require('./bible-books-by-name')
+const bookChapters = require('./bible-book-chapters')
+const { formatRegex } = require('./regex-formatter')
+const { formatString } = require('./string-formatter')
+const http = require('http')
+const https = require('https')
 
-class BibleApiClient {
+module.exports = class BibleApiClient {
   #defaultVersion = 'nvi'
   #client = null
   #versesRegex = null
@@ -122,5 +122,3 @@ class BibleApiClient {
     return responses
   }
 }
-
-export { BibleApiClient }

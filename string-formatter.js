@@ -1,4 +1,4 @@
-import ignoreAccentuations from "./formatters.js"
+const { ignoreAccentuations } = require('./formatters.js')
 
 const accentuationMap = {
   'á': 'a',
@@ -21,8 +21,6 @@ const formatSpaces = expr => {
   return expr.replace(/\s/g, '')
 }
 
-const formatString = expr => {
+module.exports.formatString = expr => {
   return formatSpaces(ignoreAccentuations(expr.toLowerCase(), accentuationMap))
 }
-
-export default formatString

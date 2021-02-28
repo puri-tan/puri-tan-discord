@@ -1,5 +1,5 @@
 {
-    "type": "module",
+    "type": "commonjs",
     "name": "puri-tan-discord",
     "description": "Puri-tan, the devotional and bible reading Discord bot",
     "keywords": [
