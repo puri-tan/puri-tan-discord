@@ -53,16 +53,16 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
         for (let error of errors) {
           if (error == 'NotFound') {
             await message.react('😐')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que eu não consegui achar esse trecho inteiro na Bíblia. Tem certeza que você digitou a referência certinho? 😐`)
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei ele... A referência está certa? 😐`)
           } else if (error == 'UnexpectedResponse') {
             await message.react('😖')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez ela esteja com problemas no momento. Desculpa! 😔`)
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez a API esteja com problemas no momento. Desculpa! 😔`)
           } else if (error == 'InvalidChapter') {
             await message.react('🤨')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que esse capítulo não existe na minha Bíblia aqui não. Tem certeza que você digitou a referência certinho? 🤨`)
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei o capítulo... A referência está certa? 🤨`)
           } else if (error == 'Failure') {
             await message.react('🤯')
-            await message.channel.send(`Não! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
+            await message.channel.send(`AH! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
           }
 
           return;
