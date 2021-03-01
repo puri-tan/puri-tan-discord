@@ -39,7 +39,7 @@ module.exports = class BibleApiClient {
 
     const bookNamesRegex = formatRegex(Object.keys(booksByName).join('|'))
     const booksRegex = '(?<BookName>' + bookNamesRegex + ')'
-    const versesRegex = '(^|\\s|,|;)' + booksRegex + '\\s+(?<Chapter>\\d+)(\\s*:\\s*(?<FromVerse>\\d+)(\\s*-\\s*(?<ToVerse>\\d+))?)?'
+    const versesRegex = '(^|\\s|,|;)' + booksRegex + '\\s+(?<Chapter>\\d+)(\\s*(:|.)\\s*(?<FromVerse>\\d+)(\\s*-\\s*(?<ToVerse>\\d+))?)?'
 
     this.#versesRegex = new RegExp(versesRegex, 'gim')
   }
