@@ -48,6 +48,23 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
       message.channel.startTyping()
       try {
         const response = await bibleApiClient.pullVersesFromMatch(groups)
+        const errors = response.filter(x => x.error).map(x => x.error)
+
+        for (let error of errors) {
+          if (error == 'NotFound') {
+            await message.react('😐')
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que eu não consegui achar esse trecho inteiro na Bíblia. Tem certeza que você digitou a referência certinho? 😐`)
+          } else if (error == 'UnexpectedResponse') {
+            await message.react('😖')
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez ela esteja com problemas no momento. Desculpa! 😔`)
+          } else if (error == 'InvalidChapter') {
+            await message.react('🤨')
+            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que esse capítulo não existe na minha Bíblia aqui não. Tem certeza que você digitou a referência certinho? 🤨`)
+          }
+
+          return;
+        }
+
         const texts = response.map(groupVerses)
 
         for (let text of texts) {

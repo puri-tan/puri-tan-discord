@@ -20,7 +20,11 @@ client.on('ready', () => {
 })
 
 client.on('message', async message => {
-  await readBibleMessageIfReferenceExists(bibleApiClient, message, { thumbnailUrl: process.env.BIBLE_THUMBNAIL_URL })
+  let options = {
+    thumbnailUrl: process.env.BIBLE_THUMBNAIL_URL,
+    adminId: process.env.ADMIN_ID
+  }
+  await readBibleMessageIfReferenceExists(bibleApiClient, message, options)
 })
 
 client.login(process.env.BOT_TOKEN)

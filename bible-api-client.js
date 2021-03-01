@@ -46,16 +46,18 @@ module.exports = class BibleApiClient {
 
   async #callUrl(url) {
     try {
-      const response = await this.#client.get(url)
+      const response = await this.#client.get(url, { validateStatus: x => x === 200 || x === 404 })
 
-      if (response.status != 200) {
-        throw `Error calling Bible API at endpoint "${url}". ${response.status}: ${response.data}`
+      if (response.status == 404) {
+        console.log(`404 Not Found on Bible API at endpoint "${url}". ${response.status}: ${response.data}`)
+        return { error: 'NotFound' }
       }
 
       return response.data
     }
     catch (error) {
-      throw `Error calling Bible API at endpoint "${url}". ${error}`
+      console.log(`Error calling Bible API at endpoint "${url}". ${response.status}: ${response.data}`)
+      return { error: 'UnexpectedResponse' }
     }
   }
 
@@ -69,7 +71,7 @@ module.exports = class BibleApiClient {
     return await this.#callUrl(url)
   }
 
-  async findVersesFromGroup(group) {
+  async #findVersesFromGroup(group) {
     const formattedName = formatString(group.BookName)
     const bookAbbrev = this.#bookMatches[formattedName]
     const bookChapterCount = bookChapters[bookAbbrev]
@@ -87,24 +89,39 @@ module.exports = class BibleApiClient {
         if (group.FromVerse >= 1 && group.ToVerse >= 1 && group.FromVerse <= group.ToVerse) {
           for (var verse = group.FromVerse; verse <= group.ToVerse; verse++) {
             const response = await this.#findVerse(bookAbbrev, group.Chapter, verse)
-            result.verses.push({ number: response.number, text: response.text })
+            if (response.error) {
+              result.error = response.error
+              return result
+            } else {
+              result.verses.push({ number: response.number, text: response.text })
+            }
           }
         }
       } else if (group.FromVerse) {
         if (group.FromVerse >= 1) {
           const response = await this.#findVerse(bookAbbrev, group.Chapter, group.FromVerse)
-          result.verses.push({ number: response.number, text: response.text })
+          if (response.error) {
+            result.error = response.error
+          } else {
+            result.verses.push({ number: response.number, text: response.text })
+          }
         }
       }
       else {
         const response = await this.#findChapter(bookAbbrev, group.Chapter)
         for (var verse of response.verses) {
-          result.verses.push({ number: verse.number, text: verse.text })
+          if (response.error) {
+            result.error = response.error
+          } else {
+            result.verses.push({ number: verse.number, text: verse.text })
+          }
         }
       }
-
-      return result
+    } else {
+      result.error = 'InvalidChapter'
     }
+
+    return result
   }
 
   matchVersesFromMessage(message) {
@@ -115,7 +132,7 @@ module.exports = class BibleApiClient {
     const responses = []
 
     for (const group of groups) {
-      const response = await this.findVersesFromGroup(group)
+      const response = await this.#findVersesFromGroup(group)
       responses.push(response)
     }
 
