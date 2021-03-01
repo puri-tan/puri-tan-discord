@@ -39,7 +39,7 @@ Temos uma instância oficial do bot sendo executada 24 por dia. Você pode convi
 
 Para executar o bot, é necessário primeiro [criar uma conta de bot na página de desenvolvedores do Discord](https://discord.com/developers/docs/intro#bots-and-apps).
 
-Após criar o bot, renomeie o arquivo [.env.template](/env.template) para `.env` (removendo a segunda extensão). Abra o arquivo e coloque na variável `BOT_TOKEN` o token de acesso do bot criado no portal de desenvolvedor do Discord.
+Após criar o bot, renomeie o arquivo [.env.template](.env.template) para `.env` (removendo a segunda extensão). Abra o arquivo e coloque na variável `BOT_TOKEN` o token de acesso do bot criado no portal de desenvolvedor do Discord.
 
 Em seguida, é necessário configurar uma conta de acesso na [Bible API](https://bibleapi.co/), obtendo assim um token de acesso. Este token deve ser colocado na variável `BIBLE_API_TOKEN` da API.
 
