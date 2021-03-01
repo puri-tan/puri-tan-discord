@@ -46,18 +46,23 @@ module.exports = class BibleApiClient {
 
   async #callUrl(url) {
     try {
-      const response = await this.#client.get(url, { validateStatus: x => x === 200 || x === 404 })
+      const response = await this.#client.get(url, { validateStatus: false })
 
       if (response.status == 404) {
-        console.log(`404 Not Found on Bible API at endpoint "${url}". ${response.status}: ${response.data}`)
+        console.log(`404 Not Found on Bible API at endpoint "${url}".`)
         return { error: 'NotFound' }
+      }
+
+      if (response.status != 200) {
+        console.log(`Error ${response.status} calling Bible API at endpoint "${url}".`)
+        return { error: 'UnexpectedResponse' }
       }
 
       return response.data
     }
     catch (error) {
-      console.log(`Error calling Bible API at endpoint "${url}". ${response.status}: ${response.data}`)
-      return { error: 'UnexpectedResponse' }
+      console.log(`Unexpected error when calling Bible API at endpoint "${url}". ${error}`)
+      return { error: 'Failure' }
     }
   }
 

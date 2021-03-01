@@ -39,13 +39,15 @@ Temos uma instância oficial do bot sendo executada 24 por dia. Você pode convi
 
 Para executar o bot, é necessário primeiro [criar uma conta de bot na página de desenvolvedores do Discord](https://discord.com/developers/docs/intro#bots-and-apps).
 
-Após criar o bot, renomeie o arquivo [.env.template](.env.template) para `.env` (removendo a segunda extensão). Abra o arquivo e coloque na variável `BOT_TOKEN` o token de acesso do bot criado no portal de desenvolvedor do Discord.
+Após criar o bot, renomeie o arquivo [.env.template](.env.template) para `.env`. Abra o arquivo e coloque na variável `BOT_TOKEN` o token de acesso do bot criado no portal de desenvolvedor do Discord.
 
-Em seguida, é necessário configurar uma conta de acesso na [Bible API](https://bibleapi.co/), obtendo assim um token de acesso. Este token deve ser colocado na variável `BIBLE_API_TOKEN` da API.
+Em seguida, é necessário configurar uma conta de acesso na [Bible API](https://bibleapi.co/), obtendo assim um token de acesso. Este token deve ser colocado na variável `BIBLE_API_TOKEN`
 
 Opcionalmente, você pode alterar a URL da Bible API caso esteja disponibilizando ela em outro local (o projeto é open-source) através da variável `BIBLE_API_URL`.
 
 Também é possível alterar a versão da bíblia que está sendo usada na leitura, sendo a padrão a versão NVI. Consulte as versões disponíveis pelo portal da Bible API e defina a versão desejada na variável `BIBLE_DEFAULT_VERSION`.
+
+Por fim, defina o ID de contato da sua conta de administrador no Discord na variável `ADMIN_ID`.
 
 Para executar o bot localmente, basta então executar o comando `node bot.js`.
 

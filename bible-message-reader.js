@@ -60,6 +60,9 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
           } else if (error == 'InvalidChapter') {
             await message.react('🤨')
             await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Só que esse capítulo não existe na minha Bíblia aqui não. Tem certeza que você digitou a referência certinho? 🤨`)
+          } else if (error == 'Failure') {
+            await message.react('🤯')
+            await message.channel.send(`Não! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
           }
 
           return;
