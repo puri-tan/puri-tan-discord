@@ -47,7 +47,7 @@ Opcionalmente, você pode alterar a URL da Bible API caso esteja disponibilizand
 
 Também é possível alterar a versão da bíblia que está sendo usada na leitura, sendo a padrão a versão NVI. Consulte as versões disponíveis pelo portal da Bible API e defina a versão desejada na variável `BIBLE_DEFAULT_VERSION`.
 
-Por fim, defina o ID de contato da sua conta de administrador no Discord na variável `ADMIN_ID`.
+Por fim, defina o [ID de contato da sua conta de administrador no Discord](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID) na variável `ADMIN_ID`.
 
 Para executar o bot localmente, basta então executar o comando `node bot.js`.
 
