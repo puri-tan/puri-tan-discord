@@ -55,7 +55,7 @@ Atualmente, Puri-tan é construída por dois colaboradores principais:
 
 * [Ismael Carlos Velten](https://github.com/ivelten): autor deste repositório e o responsável pela manutenção do código do sistema do bot. Desenvolvedor de software a mais de 12 anos, tem buscado oportunidades de fazer projetos abertos que busquem divulgar o Evangelho e auxiliar Cristãos em sua vida devocional.
 
-* [Karolyne da Rocha Bastos](https://karolynerocha.carrd.co/): autora da imagem visual de Puri-tan, Karolyne é uma Ilustradora freelance que  se dedica a diversos projetos, sendo o mais famoso o [Balsamus Comic](https://balsamuscomic.carrd.co/), baseado na cultura do oriente médio antigo. A intenção compartilhada de buscar oportunidades em projetos cristãos a trouxe como participante deste projeto.
+* [Karolyne da Rocha Bastos](https://karolynerocha.carrd.co/): autora da identidade visual de Puri-tan, Karolyne é uma Ilustradora freelance que  se dedica a diversos projetos, sendo o mais famoso o [Balsamus Comic](https://balsamuscomic.carrd.co/), baseado na cultura do oriente médio antigo. A intenção compartilhada de buscar oportunidades em projetos cristãos a trouxe como participante deste projeto.
 
 Além destes, outros colaboradores estão participando dos testes e sugestões de features, dentre os quais destacamos por sua participação no servidor oficial:
 
