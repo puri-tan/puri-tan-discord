@@ -61,7 +61,8 @@ Atualmente, Puri-tan é construída por dois colaboradores principais:
 
 Além destes, outros colaboradores estão participando dos testes e sugestões de features, dentre os quais destacamos por sua participação no servidor oficial:
 
-* Sara Hu Mia
+* Sara Humia
 * Maycon Bruno
 * Jennifer Kelly
 * Samara Parcero
+* Rafael Moreira Haubrich
