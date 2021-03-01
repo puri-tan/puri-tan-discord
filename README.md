@@ -35,7 +35,7 @@ Para ler a Bíblia, o bot utiliza a [Bible API](https://bibleapi.co/).
 
 Temos uma instância oficial do bot sendo executada 24 por dia. Você pode convidá-la livremente para seu servidor, bastando usar o link de Convite no início deste documento.
 
-### Como utilizar este projeto (Discord)
+### Como utilizar este projeto
 
 Para executar o bot, é necessário primeiro [criar uma conta de bot na página de desenvolvedores do Discord](https://discord.com/developers/docs/intro#bots-and-apps).
 
