@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 const { Client } = require('discord.js')
-const { readBibleMessageIfReferenceExists } = require('./bible-message-reader.js')
-const BibleApiClient = require('./bible-api-client.js')
+const { readBibleMessageIfReferenceExists } = require('./modules/read-bible-message')
+const BibleApiClient = require('@puri-tan/bible-api-client')
 
 dotenv.config()
 
