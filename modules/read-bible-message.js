@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js")
+
 const maxMessageSize = 2048
 
 const groupVerses = response => {
@@ -45,52 +47,48 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
 
     if (groups.length > 0) {
       await message.react('👀')
-      message.channel.startTyping()
-      try {
-        const response = await bibleApiClient.pullVersesFromMatch(groups)
-        const errors = response.filter(x => x.error).map(x => x.error)
+      await message.channel.sendTyping()
 
-        for (let error of errors) {
-          if (error == 'NotFound') {
-            await message.react('😐')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei ele... A referência está certa? 😐`)
-          } else if (error == 'UnexpectedResponse') {
-            await message.react('😖')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez a API esteja com problemas no momento. Desculpa! 😔`)
-          } else if (error == 'InvalidChapter') {
-            await message.react('🤨')
-            await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei o capítulo... A referência está certa? 🤨`)
-          } else if (error == 'Failure') {
-            await message.react('🤯')
-            await message.channel.send(`AH! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
-          }
+      const response = await bibleApiClient.pullVersesFromMatch(groups)
+      const errors = response.filter(x => x.error).map(x => x.error)
 
-          return;
+      for (let error of errors) {
+        if (error == 'NotFound') {
+          await message.react('😐')
+          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei ele... A referência está certa? 😐`)
+        } else if (error == 'UnexpectedResponse') {
+          await message.react('😖')
+          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez a API esteja com problemas no momento. Desculpa! 😔`)
+        } else if (error == 'InvalidChapter') {
+          await message.react('🤨')
+          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei o capítulo... A referência está certa? 🤨`)
+        } else if (error == 'Failure') {
+          await message.react('🤯')
+          await message.channel.send(`AH! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
         }
 
-        const texts = response.map(groupVerses)
+        return;
+      }
 
-        for (let text of texts) {
-          for (let partIndex = 0; partIndex < text.parts.length; partIndex++) {
-            let toVerse = text.parts[partIndex].toVerse ? `-${text.parts[partIndex].toVerse}` : ''
-            let reply =
-              partIndex == 0
-                ? text.parts.length > 1
-                  ? `Parece que você postou um trecho bíblico um tanto longo na sua mensagem, <@${message.author.id}>!\nVou ler ele em partes pra você, aqui vai a parte ${partIndex + 1}!`
-                  : `Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Vou ler ele pra você!`
-                : `Aqui vai a parte ${partIndex + 1} do texto bíblico que você postou, <@${message.author.id}>!`
+      const texts = response.map(groupVerses)
 
-            await message.channel.send(reply, {
-              embed: {
-                title: `${text.bookName} ${text.chapter}:${text.parts[partIndex].fromVerse}${toVerse}`,
-                description: text.parts[partIndex].text,
-                thumbnail: { url: options.thumbnailUrl }
-              }
-            })
-          }
+      for (let text of texts) {
+        for (let partIndex = 0; partIndex < text.parts.length; partIndex++) {
+          let toVerse = text.parts[partIndex].toVerse ? `-${text.parts[partIndex].toVerse}` : ''
+          let reply =
+            partIndex == 0
+              ? text.parts.length > 1
+                ? `Parece que você postou um trecho bíblico um tanto longo na sua mensagem, <@${message.author.id}>!\nVou ler ele em partes pra você, aqui vai a parte ${partIndex + 1}!`
+                : `Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Vou ler ele pra você!`
+              : `Aqui vai a parte ${partIndex + 1} do texto bíblico que você postou, <@${message.author.id}>!`
+
+          let embed = new MessageEmbed()
+            .setTitle(`${text.bookName} ${text.chapter}:${text.parts[partIndex].fromVerse}${toVerse}`)
+            .setDescription(text.parts[partIndex].text)
+            .setThumbnail(options.thumbnailUrl)
+
+          await message.channel.send({ content: reply, embeds: [embed] })
         }
-      } finally {
-        message.channel.stopTyping()
       }
     }
   }
