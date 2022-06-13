@@ -29,7 +29,7 @@ Este projeto surgiu com o desejo de auxiliar a comunidade cristã online do Bras
 
 Este bot foi feito com um stack de tecnologia simples e eficiente. Todo o core do sistema foi projetado em [Node.js](https://nodejs.org/en/), escrito em CommonJS. A razão de não usar Modules para isso é porque nosso serviço de hospedagem oficial não os suporta. É provável que isso mude no futuro, se houverem novas possibilidades ou evolução da tecnologia do servidor.
 
-Para ler a Bíblia, o bot utiliza a [Bible API](https://bibleapi.co/).
+Para ler a Bíblia, o bot utiliza a [Bible API](https://www.abibliadigital.com.br/).
 
 ### Instância oficial
 
