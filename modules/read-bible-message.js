@@ -46,27 +46,36 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
     const groups = bibleApiClient.matchVersesFromMessage(message.content)
 
     if (groups.length > 0) {
-      await message.react('👀')
-      await message.channel.sendTyping()
+      message.react('👀').catch(e => console.error(e))
+      message.channel.sendTyping().catch(e => console.error(e))
 
       const response = await bibleApiClient.pullVersesFromMatch(groups)
       const errors = response.filter(x => x.error).map(x => x.error)
 
       for (let error of errors) {
         if (error == 'NotFound') {
-          await message.react('😐')
-          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei ele... A referência está certa? 😐`)
+          message.react('😐')
+            .catch(e => console.error(e))
+          message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei ele... A referência está certa? 😐`)
+            .catch(e => console.error(e))
         } else if (error == 'UnexpectedResponse') {
-          await message.react('😖')
-          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez a API esteja com problemas no momento. Desculpa! 😔`)
+          message.react('😖')
+            .catch(e => console.error(e))
+          message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas a API da Bíblia que eu uso pra ler me deu uma resposta que eu não entendi. Talvez a API esteja com problemas no momento. Desculpa! 😔`)
+            .catch(e => console.error(e))
         } else if (error == 'InvalidChapter') {
-          await message.react('🤨')
-          await message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei o capítulo... A referência está certa? 🤨`)
+          message.react('🤨')
+            .catch(e => console.error(e))
+          message.channel.send(`Parece que você postou um trecho bíblico na sua mensagem, <@${message.author.id}>. Mas não achei o capítulo... A referência está certa? 🤨`)
+            .catch(e => console.error(e))
         } else if (error == 'Failure') {
-          await message.react('🤯')
-          await message.channel.send(`AH! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
+          message.react('🤯')
+            .catch(e => console.error(e))
+          message.channel.send(`AH! Aconteceu um erro no meu sistema. Socorro, <@${options.adminId}>! Verifique meus logs, por favor! 😖`)
+            .catch(e => console.error(e))
         }
 
+        console.error(error)
         return;
       }
 
