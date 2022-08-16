@@ -96,7 +96,7 @@ module.exports.readBibleMessageIfReferenceExists = async (bibleApiClient, messag
             .setDescription(text.parts[partIndex].text)
             .setThumbnail(options.thumbnailUrl)
 
-          await message.channel.send({ content: reply, embeds: [embed] })
+          message.channel.send({ content: reply, embeds: [embed] }).catch(e => console.log(e))
         }
       }
     }
